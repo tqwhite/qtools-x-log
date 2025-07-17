@@ -15,8 +15,6 @@ const util = require('util');
 //START OF moduleFunction() ============================================================
 
 const moduleFunction = function () {
-
-  const chalk = await import('chalk');
 	const annotation = `HELLO FROM: ${__filename}. Note: this function accesses the command line directly.`;
 
 	const { silent, quiet, verbose, debug } = commandLineParameters.switches; //flags used here need to be added to assemble-configuration-show-help-maybe-exit.js
