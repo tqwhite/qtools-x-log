@@ -17,9 +17,30 @@ const util = require('util');
 const moduleFunction = function () {
 	const annotation = `HELLO FROM: ${__filename}. Note: this function accesses the command line directly.`;
 
-	const { silent, quiet, verbose, debug } = commandLineParameters.switches; //flags used here need to be added to assemble-configuration-show-help-maybe-exit.js
+	const { silent, quiet, verbose, debug, noColor } = commandLineParameters.switches; //flags used here need to be added to assemble-configuration-show-help-maybe-exit.js
 
-	const outputFunction = console.error;
+	let defaultOutputFunction = console.error;
+	
+	const logToStdOut = () => {
+		defaultOutputFunction = console.log;
+	};
+	
+	const outputFunction = (message, options = {}) => {
+		const finalOptions = {
+			...{
+				depth: 4,
+			},
+			...options,
+			...{ colors: noColor ? false : true },
+		};
+
+		if (typeof message == 'object') {
+			message = util.inspect(message, finalOptions);
+		}
+
+		defaultOutputFunction(message);
+	};
+	
 	debug && outputFunction(`found -debug flag`);
 	verbose && outputFunction(`found -verbose flag`);
 
@@ -69,11 +90,14 @@ const moduleFunction = function () {
 	};
 
 	const emphatic = (message, options = {}) => {
-		message = stringify(message, options);
 		if (silent || quiet) {
 			return;
 		}
-		outputFunction(color.bgBlack.yellow(message));
+		if (!noColor) {
+			outputFunction(color.bgBlack.yellow(message)), options;
+		} else {
+			outputFunction(`*** ${message} ***`), options;
+		}
 	};
 
 	const verboseFunction = (message, options = {}) => {
@@ -99,10 +123,11 @@ const moduleFunction = function () {
 	
 
 	let processFilesDirectory = '';
+	
 	let setProcessFilesDirectory = (dirPath) => {
 		fs.mkdirSync(dirPath, { recursive: true });
 		processFilesDirectory = dirPath;
-		status(`Detail process log directory set: ${dirPath}`);
+		status(`Process detail files directory set: ${dirPath}`);
 	};
 	
 
@@ -120,9 +145,7 @@ const moduleFunction = function () {
 		} else {
 			fs.writeFileSync(filePath, fileData);
 		}
-		if (!silent && verbose) {
-			status(`save to ${filePath}`);
-		}
+		status(`process detail log file saved to ${filePath}`);
 	};
 
 	let showProgress = true;
@@ -149,7 +172,9 @@ const moduleFunction = function () {
 		getProcessFilesDirectory,
 		saveProcessFile,
 		progress: progressFunction,
-		setProgressMessageStatus
+		setProgressMessageStatus,
+		color,
+		logToStdOut,
 	};
 };
 
