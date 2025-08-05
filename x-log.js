@@ -22,6 +22,7 @@ const moduleFunction = function () {
 
 	let defaultOutputFunction = console.error;
 	
+
 	const logToStdOut = () => {
 		defaultOutputFunction = console.log;
 	};
@@ -130,7 +131,10 @@ const moduleFunction = function () {
 	};
 	
 
-	let processFilesDirectory = require('os')tmpdir();
+	let processFilesDirectory = path.join(
+		require('os').tmpdir(),
+		`xLog-${timestamp}_${pid}`,
+	);
 	
 
 	let setProcessFilesDirectory = (dirPath) => {
