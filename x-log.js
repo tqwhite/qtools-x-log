@@ -133,9 +133,10 @@ const moduleFunction = function () {
 
 	let processFilesDirectory = path.join(
 		require('os').tmpdir(),
-		`xLog-${timestamp}_${pid}`,
+		`xLog_${Math.floor(Date.now() / 1000)
+			.toString()
+			.slice(-4)}`,
 	);
-	
 
 	let setProcessFilesDirectory = (dirPath) => {
 		fs.mkdirSync(dirPath, { recursive: true });

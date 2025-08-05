@@ -119,7 +119,7 @@ xLog.debug('Complex object state:', complexObj, { label: 'User State Debug' });
 
 ### **Version Notes:**
 
-**1.0.10** Added default (os.tmpdir()) for processFile() directory
+**1.0.11** Added default (os.tmpdir()) for processFile() directory
 
 **1.0.8** Added logToStdErr() to compliment logToStdOut(); Updated README with complete API reference and integration examples
 
