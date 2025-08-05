@@ -17,7 +17,8 @@ const util = require('util');
 const moduleFunction = function () {
 	const annotation = `HELLO FROM: ${__filename}. Note: this function accesses the command line directly.`;
 
-	const { silent, quiet, verbose, debug, noColor } = commandLineParameters.switches; //flags used here need to be added to assemble-configuration-show-help-maybe-exit.js
+	const { silent, quiet, verbose, debug, noColor } =
+		commandLineParameters.switches; //flags used here may need to be added to assemble-configuration-show-help-maybe-exit.js
 
 	let defaultOutputFunction = console.error;
 	
@@ -25,6 +26,12 @@ const moduleFunction = function () {
 		defaultOutputFunction = console.log;
 	};
 	
+
+	const logToStdErr = () => {
+		defaultOutputFunction = console.error;
+	};
+	
+
 	const outputFunction = (message, options = {}) => {
 		const finalOptions = {
 			...{
@@ -41,6 +48,7 @@ const moduleFunction = function () {
 		defaultOutputFunction(message);
 	};
 	
+
 	debug && outputFunction(`found -debug flag`);
 	verbose && outputFunction(`found -verbose flag`);
 
@@ -124,6 +132,7 @@ const moduleFunction = function () {
 
 	let processFilesDirectory = '';
 	
+
 	let setProcessFilesDirectory = (dirPath) => {
 		fs.mkdirSync(dirPath, { recursive: true });
 		processFilesDirectory = dirPath;
@@ -175,6 +184,7 @@ const moduleFunction = function () {
 		setProgressMessageStatus,
 		color,
 		logToStdOut,
+		logToStdErr,
 	};
 };
 
