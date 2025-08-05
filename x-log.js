@@ -130,7 +130,7 @@ const moduleFunction = function () {
 	};
 	
 
-	let processFilesDirectory = '';
+	let processFilesDirectory = require('os')tmpdir();
 	
 
 	let setProcessFilesDirectory = (dirPath) => {

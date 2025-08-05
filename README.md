@@ -119,6 +119,8 @@ xLog.debug('Complex object state:', complexObj, { label: 'User State Debug' });
 
 ### **Version Notes:**
 
+**1.0.9** Added default (os.tmpdir()) for processFile() directory
+
 **1.0.8** Added logToStdErr() to compliment logToStdOut(); Updated README with complete API reference and integration examples
 
 **1.0.7** Enhanced object formatting with `util.inspect()` integration, `noColor` flag support, and `logToStdOut()` method. Full compatibility with qtools command-line patterns.

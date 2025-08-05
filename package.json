@@ -1,6 +1,6 @@
 {
 	"name": "qtools-x-log",
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"description": "application specific logging",
 	"main": "x-log.js",
 	"scripts": {
