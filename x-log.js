@@ -132,7 +132,7 @@ const moduleFunction = function () {
 	
 
 	let processFilesDirectory = path.join(
-		require('os').tmpdir(),
+		'/tmp',
 		`xLog_${Math.floor(Date.now() / 1000)
 			.toString()
 			.slice(-4)}`,
@@ -149,17 +149,22 @@ const moduleFunction = function () {
 	
 
 	const saveProcessFile = (fileName, inData, options = {}) => {
-		let fileData = inData;
-		if (options.saveAsJson) {
-			fileData = JSON.stringify(inData, '', '\t');
-		}
+		const fileData = options.saveAsJson
+			? JSON.stringify(inData, '', '\t')
+			: inData;
+
 		const filePath = path.join(processFilesDirectory, fileName);
-		if (options.append) {
+		const dirPath = path.dirname(filePath);
+		fs.mkdirSync(dirPath, { recursive: true });
+
+		const fileExists = fs.existsSync(filePath);
+
+		if (options.append && fileExists) {
 			fs.appendFileSync(filePath, fileData);
 		} else {
 			fs.writeFileSync(filePath, fileData);
+			status(`process detail log file saved to ${filePath}`);
 		}
-		status(`process detail log file saved to ${filePath}`);
 	};
 
 	let showProgress = true;
