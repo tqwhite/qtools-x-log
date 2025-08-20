@@ -186,7 +186,7 @@ const moduleFunction = function () {
 		error,
 		result,
 		status,
-		warn
+		warn,
 		debug: debugFunction,
 		emphatic,
 		verbose: verboseFunction,
