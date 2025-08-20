@@ -97,6 +97,8 @@ const moduleFunction = function () {
 		}
 		outputFunction(message);
 	};
+	
+	const warn=status;
 
 	const emphatic = (message, options = {}) => {
 		if (silent || quiet) {
@@ -121,11 +123,11 @@ const moduleFunction = function () {
 		if (!silent && debug) {
 			if (options.label) {
 				outputFunction(
-					`\n${'DEBUG: '.padEnd(43, '-')}\n${options.label}\n${message}${''.padEnd(50, '-')}\n`,
+					`${options.label}: ${message}`,
 				);
 			}
 			outputFunction(
-				`\n${''.padEnd(50, '-')}\n${message}${''.padEnd(50, '-')}\n`,
+				message,
 			);
 		}
 	};
@@ -184,6 +186,7 @@ const moduleFunction = function () {
 		error,
 		result,
 		status,
+		warn
 		debug: debugFunction,
 		emphatic,
 		verbose: verboseFunction,

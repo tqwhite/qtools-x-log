@@ -119,6 +119,8 @@ xLog.debug('Complex object state:', complexObj, { label: 'User State Debug' });
 
 ### **Version Notes:**
 
+**1.0.13** Added xLog.warn() (same as status) and reduced decorations on xLog.debug()
+
 **1.0.12** Made it so that appending to existing files does not log the filepath, only on create
 
 **1.0.11** Added default (os.tmpdir()) for processFile() directory
