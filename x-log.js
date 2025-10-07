@@ -140,10 +140,10 @@ const moduleFunction = function () {
 			.slice(-4)}`,
 	);
 
-	let setProcessFilesDirectory = (dirPath) => {
+	let setProcessFilesDirectory = (dirPath, options={}) => {
 		fs.mkdirSync(dirPath, { recursive: true });
 		processFilesDirectory = dirPath;
-		status(`Process detail files directory set: ${dirPath}`);
+		!options.quiet && status(`Process detail files directory set: ${dirPath}`);
 	};
 	
 

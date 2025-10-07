@@ -50,7 +50,7 @@ xLog.debug(message, options)      // Only shown with -debug flag, supports optio
 xLog.progress(message, options)   // Toggleable progress messages
 
 // File operations
-xLog.setProcessFilesDirectory(dirPath)        // Create and set process files directory
+xLog.setProcessFilesDirectory(dirPath, options)        // Create and set process files directory {quiet}
 xLog.getProcessFilesDirectory()               // Get current process files directory
 xLog.saveProcessFile(fileName, data, options) // Save to file, options: {saveAsJson, append}
 
@@ -118,6 +118,8 @@ xLog.debug('Complex object state:', complexObj, { label: 'User State Debug' });
 - **color**: Direct access to chalk color instance for custom formatting
 
 ### **Version Notes:**
+
+**1.0.15** Added quiet option to setProcessFilesDirectory() to suppress directory notification
 
 **1.0.14** Added xLog.warn() (same as status) and reduced decorations on xLog.debug()
 
