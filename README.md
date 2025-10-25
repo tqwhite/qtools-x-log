@@ -119,6 +119,8 @@ xLog.debug('Complex object state:', complexObj, { label: 'User State Debug' });
 
 ### **Version Notes:**
 
+**1.0.16** Added quiet option.suppressLogNotification to saveProcessFile() to suppress file path notification
+
 **1.0.15** Added quiet option to setProcessFilesDirectory() to suppress directory notification
 
 **1.0.14** Added xLog.warn() (same as status) and reduced decorations on xLog.debug()

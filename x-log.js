@@ -161,7 +161,7 @@ const moduleFunction = function () {
 
 		const fileExists = fs.existsSync(filePath);
 
-		if (options.append && fileExists) {
+		if (options.suppressLogNotification || options.append || fileExists) {
 			fs.appendFileSync(filePath, fileData);
 		} else {
 			fs.writeFileSync(filePath, fileData);
